@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傳圖遊戲</title>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+         h2, h3, h4 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+        {
+            text-align: center;
+        }
+        h1 {
+        text-align: center;
+        font-size: 32px;
+        color: #AE0000
+        }
+        h2 {
+        font-size: 24px;
+        color: #000093
+
+        }
+        h3 {
+         font-size: 20px;
+        }
+        h4 {
+        font-size: 16px; 
+        }
+        .sidebar {
+            width: 220px;
+            background-color: #f8f8f8;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed; 
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .content {
+            margin-left: 260px; 
+            padding: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .inline-square {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(173, 216, 230, 0.7);
+    border: 2px solid #555;
+    vertical-align: middle;
+}
+    </style>
+<body>
+    </div>
+    <nav class="sidebar">
+        <h2>網站選單</h2>
+        <ul>
+            <li><a href="遊戲.html" class="active">Google vision kit 介紹</a></li>
+            <li><a href="遊戲1.html">傳圖遊戲</a></li>
+        </ul>
+    </nav>
+        <div class="container">
+        <h1> 照片接龍 </h1>
+        <h3>請依序往下捲動來進行遊戲。重新載入頁面即可重玩。</h3>
+        <h2>遊戲開始</h2>
+
+        <h3>請 Player 1 點擊按鈕來決定第一個題目！</h3>
+        <span class="inline-square"style="width: 150px; height: 30px;"></span>
+          <h4>預留按鈕位置<h4>
+
+
+        <h2>Player 1: 拍照</h2>
+        <h3>你的題目是：<strong>（題目）</strong></h3>
+        <h3>請使用 Vision Kit 拍攝一張符合題目的照片。</h3>
+         <span class="inline-square"></span>
+          <h4>預留照片位置<h4>
+        <span class="inline-square"style="width: 150px; height: 30px;"></span>
+          <h4>預留位置<h4>
+
+        <h2>Player 2:猜題 </h2>
+        <h3>請看 Player 1 拍攝的照片，然後猜猜看這是什麼東西？</h3>
+         <span class="inline-square" ></span>
+          <h4>預留答題區域<h4>
+        <span class="inline-square"style="width: 150px; height: 30px;"></span>
+          <h4>預留位置<h4>
+
+
+        <h2>Player 3: 拍照</h2>
+        <h3>Player 2 的提示是：</h3>
+        <h3>請使用 Vision Kit 拍攝一張符合「提示」的照片。</h3> 
+         <span class="inline-square" ></span>
+         <h4>預留照片位置<h4>
+        <span class="inline-square"style="width: 150px; height: 30px;"></span>
+          <h4>預留位置<h4>
+
+
+        <h2>Player 4: 最終猜測</h2>
+        <h3>請看 Player 3 拍攝的照片：</h3>
+         <span class="inline-square" ></span>
+         <h4>預留答題區域<h4>
+
+        <h2>遊戲結束</h2>
+        <h3>遊戲結束！讓我們回顧一下</h3>
+</div>
+</div>
+   
+</body>
+</html>
+
+
+
+
+
+
