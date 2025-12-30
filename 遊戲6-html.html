@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手機拍照上傳</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        .upload-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #status { margin-top: 20px; color: #555; font-weight: bold; }
+        .btn { background-color: #27ae60; color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="upload-card">
+        <h2>傳圖遊戲 - 拍照端</h2>
+        <p>點擊下方按鈕拍照，照片會即時傳送到網頁遊戲中。</p>
+        
+        <input type="file" id="cameraInput" accept="image/*" capture="camera" style="display:none">
+        
+        <button class="btn" id="startBtn">開啟相機拍照</button>
+        <div id="status">準備就緒</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSVDrHRVnzIyRXJiyYbSlaNvLV3cMMjNk",
+            authDomain: "nessies-b40c6.firebaseapp.com",
+            projectId: "nessies-b40c6",
+            storageBucket: "nessies-b40c6.firebasestorage.app",
+            messagingSenderId: "709915985736",
+            appId: "1:709915985736:web:e9b6ad6d2d9c2c01d8d57d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const cameraInput = document.getElementById('cameraInput');
+        const startBtn = document.getElementById('startBtn');
+        const status = document.getElementById('status');
+
+        startBtn.onclick = () => cameraInput.click();
+
+        cameraInput.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            status.innerText = "正在壓縮並上傳圖片...";
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                const base64String = event.target.result;
+                
+                try {
+                    await updateDoc(doc(db, "game", "current_photo"), {
+                        url: base64String
+                    });
+                    status.innerText = "✅ 上傳成功！請看電腦畫面。";
+                    status.style.color = "green";
+                } catch (err) {
+                    status.innerText = "❌ 上傳失敗：" + err.message;
+                    status.style.color = "red";
+                }
+            };
+            reader.readAsDataURL(file);
+        };
+    </script>
+</body>
+</html>
