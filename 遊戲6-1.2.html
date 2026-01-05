@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手機拍照上傳</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background-color: #f4f4f9; }
+        .upload-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        #status { margin-top: 20px; color: #555; font-weight: bold; }
+        .btn { background-color: #27ae60; color: white; padding: 15px 30px; border: none; border-radius: 50px; font-size: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="upload-card">
+        <h2>傳圖遊戲 - 拍照端</h2>
+        <p>點擊下方按鈕拍照，照片會即時傳送到網頁遊戲中。</p>
+        
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+        
+        <button class="btn" id="startBtn">開啟相機拍照</button>
+        <div id="status">準備就緒</div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSVDrHRVnzIyRXJiyYbSlaNvLV3cMMjNk",
+            authDomain: "nessies-b40c6.firebaseapp.com",
+            projectId: "nessies-b40c6",
+            storageBucket: "nessies-b40c6.firebasestorage.app",
+            messagingSenderId: "709915985736",
+            appId: "1:709915985736:web:e9b6ad6d2d9c2c01d8d57d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const cameraInput = document.getElementById('cameraInput');
+        const startBtn = document.getElementById('startBtn');
+        const status = document.getElementById('status');
+
+        startBtn.onclick = () => cameraInput.click();
+
+        cameraInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            status.innerText = "處理中...";
+
+            const reader = new FileReader();
+            
+            
+            reader.onload = (event) => {
+                // 1. 建立一個 Image 物件
+                const img = new Image();
+                
+                // 2. 當圖片載入完成後，才執行壓縮與上傳
+                img.onload = async () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    const MAX_WIDTH = 500;
+                    // 計算縮放比例
+                    const scale = MAX_WIDTH / img.width;
+                    
+                    // 設定 Canvas 大小 (若圖片本來就比較小，就不放大)
+                    if (img.width > MAX_WIDTH) {
+                        canvas.width = MAX_WIDTH;
+                        canvas.height = img.height * scale;
+                    } else {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                    }
+
+                    // 畫圖
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // 轉成 Base64 字串 (0.5 品質已經足夠清晰且傳輸快)
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.5);
+
+                    status.innerText = "上傳中...";
+
+                    try {
+                        await updateDoc(doc(db, "game", "current_photo"), {
+                            url: compressedBase64
+                        });
+                        status.innerText = "✅ 上傳成功！請看電腦畫面。";
+                        status.style.color = "green";
+                    } catch (err) {
+                        console.error(err);
+                        status.innerText = "❌ 上傳失敗";
+                        status.style.color = "red";
+                    }
+                };
+
+                // 3. 設定圖片來源，觸發 img.onload
+                img.src = event.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        };
+    </script>
+</body>
+</html>
