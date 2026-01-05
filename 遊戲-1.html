@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傳圖遊戲</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif; 
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 40px; 
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative; 
+        }
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #AE0000;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 28px;
+            color: #000093;
+            margin: 20px 0;
+        }
+        h3 {
+            font-size: 20px;
+            color: #333;
+            margin: 10px 0;
+        }
+        h4 {
+            font-size: 16px; 
+            color: #555;
+            margin-top: 5px;
+        }
+
+        
+        .sidebar {
+            width: 220px;
+            background-color: #f8f8f8;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            position: fixed; 
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        .sidebar h2 { font-size: 24px; margin-top: 0; color: #333; }
+        .sidebar ul { list-style-type: none; padding: 0; margin: 0; }
+        .sidebar ul li { margin-bottom: 10px; }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        .sidebar ul li a:hover, .sidebar ul li a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .content {
+            margin-left: 260px; 
+            padding: 20px;
+        }
+
+        .inline-square {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(173, 216, 230, 0.7);
+            border: 2px dashed #888;
+            vertical-align: middle;
+            margin: 20px 0;
+            line-height: 200px; 
+            color: #666;
+        }
+
+       
+        .step {
+            display: none; 
+            min-height: 100vh; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-top: 2px dashed #ddd;
+            padding-top: 40px;
+            margin-top: 20px;
+        }
+
+        .step.active {
+            display: flex !important;
+            animation: slideDown 0.8s ease-out;
+        }
+        #step0 {
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            border-top: none;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 40px; 
+            border: none;
+            font-size: 20px; 
+            cursor: pointer;
+            border-radius: 50px; 
+            transition: all 0.2s;
+            
+            transform: translateY(4px);
+            box-shadow: 0px 4px 10px rgba(52, 152, 219, 0.3); 
+            
+            margin-top: 30px;
+            display: inline-block;
+        }
+        
+        .game-btn:focus { outline: none; }
+
+    </style>
+</head>
+   <nav class="sidebar">
+        <h2>網站選單</h2>
+        <ul>
+            <li><a href="遊戲-1.html">Google vision kit 介紹</a></li>
+            <li><a href="遊戲3.html">傳圖遊戲</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <div class="container">
+<h1>Google vision kit</h1>
+    <h2>1. 什麼是 Vision Kit？</h2>
+    <img src="Google vision kit1.jpg"alt="圖片說明"width="200" height="150">
+    <h3>一套 DIY 智慧相機套件。其核心是一塊 Vision Bonnet 擴充板，上面搭載了 Intel Movidius VPU（視覺處理單元），專門用來加速 AI 運算</h3>
+    <h2>2. 核心特色：Edge AI（ 邊緣 AI）</h2>
+    <h3>它最大的特點是「本機 (On-Device)運算」</h3>
+    <h3>影像辨識不需要上傳雲端，帶來三大好處</h3>
+    <h3>反應即時： 延遲極低</h3>
+    <h3>保護隱私： 影像不外流</h3>
+    <h3>離線運作： 不需依賴網路連線</h3>
+    <h2>3. 內建 AI 模型</h3>
+    <h3>物體辨識： 辨識數千種常見物品（如香蕉、鍵盤）</h3>
+    <h3>人臉與情緒偵測： 偵測人臉並分析「喜悅分數」</h3>
+    <h3>動物分類： 辨識人、貓、狗</h3>
+    <h2>4. 創意應用</h2>
+    <h3>智慧寵物門： 只辨識你家的貓狗才開門</h3>
+    <h3>鳥類觀察器： 辨識特定鳥類並自動拍照</h3>
+    <h3>保全監控： 偵測是否有陌生人入侵指定區域</h3>
+    <h2>5. 適合誰？</h2>
+    <h3>學生與創客 (Makers)： 學習 AI、機器學習與硬體整合的最佳入門</h3>
+    <h3>開發者： 快速打造 Edge AI 應用程式原型的利器</h3>
+    <h2>總結一句話</h2>
+    <h2>Google Vision Kit 是一套 DIY 智慧相機套件，讓開發者和創客能輕鬆打造出不需連網、可即時在裝置上運作的 AI 電腦視覺應用</h2>
+    <h2>官方影片</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Y8iQJOjw4S4?si=PoyHxoZqMKyV80aR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+        </div>
+    </main>
+
+</body>
+</html>
